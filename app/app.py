@@ -43,10 +43,20 @@ class App(QtWidgets.QWidget):
         self.btn_invert.clicked.connect(self.invert_devise)
 
     def compute(self):
-        print("compute")
+        amount = self.spn_amount.value()
+        devise_from = self.cbb_devisesFrom.currentText()
+        devise_to = self.cbb_devisesTo.currentText()
+        result = self.c.convert(amount, devise_from, devise_to)
+        self.spn_amountConverted.setValue(result)
 
     def invert_devise(self):
-        print("Inverser devise")
+        devise_from = self.cbb_devisesFrom.currentText()
+        devise_to = self.cbb_devisesTo.currentText()
+
+        self.cbb_devisesFrom.setCurrentText(devise_to)
+        self.cbb_devisesTo.setCurrentText(devise_from)
+
+        self.compute()
 
 app = QtWidgets.QApplication([])
 
