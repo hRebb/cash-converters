@@ -8,6 +8,7 @@ class App(QtWidgets.QWidget):
         self.setWindowTitle("Cash Converters")
         self.setup_ui()
         self.set_default_values()
+        self.setup_connections()
 
     def setup_ui(self):
         self.layout = QtWidgets.QHBoxLayout(self)
@@ -34,6 +35,18 @@ class App(QtWidgets.QWidget):
 
         self.spn_amount.setValue(100)
         self.spn_amountConverted.setValue(100)
+
+    def setup_connections(self):
+        self.cbb_devisesFrom.activated.connect(self.compute)
+        self.cbb_devisesTo.activated.connect(self.compute)
+        self.spn_amount.valueChanged.connect(self.compute)
+        self.btn_invert.clicked.connect(self.invert_devise)
+
+    def compute(self):
+        print("compute")
+
+    def invert_devise(self):
+        print("Inverser devise")
 
 app = QtWidgets.QApplication([])
 
